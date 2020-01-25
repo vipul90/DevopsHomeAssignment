@@ -59,7 +59,7 @@ stages
 		{
 		    withSonarQubeEnv('SonarTestServer')
 			{
-				sh 'dotnet ${scannerHome}/SonarScanner.MSBuild.dll end'
+				sh 'dotnet "${scannerHome}/SonarScanner.MSBuild.dll" end'
 			}
 		}
 	}
