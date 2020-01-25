@@ -3,8 +3,7 @@ pipeline{
 
 environment
 {
-    scannerToolPath = 'C:/Program Files (x86)/Jenkins/tools/hudson.plugins.sonar.MsBuildSQRunnerInstallation/sonar_scanner_dotnet' 
-	sonarScanner = "${scannerToolPath}/SonarScanner.MSBuild.dll"
+     scannerHome = tool name: 'sonar_scanner_dotnet', type: 'hudson.plugins.sonar.MsBuildSQRunnerInstallation'   
 }
 	
 options
@@ -42,7 +41,7 @@ stages
 		{
 			withSonarQubeEnv('SonarTestServer')
 			{
-				sh 'dotnet "${sonarScanner}" begin /key:$JOB_NAME /name:$JOB_NAME /version:1.0'
+				sh 'dotnet "${scannerHome}/SonarScanner.MSBuild.dll" begin /key:$JOB_NAME /name:$JOB_NAME /version:1.0'
 			}
 		}
 	}
@@ -60,7 +59,7 @@ stages
 		{
 		    withSonarQubeEnv('SonarTestServer')
 			{
-				sh 'dotnet "${sonarScanner}" end'
+				sh 'dotnet "${scannerHome}/SonarScanner.MSBuild.dll" end'
 			}
 		}
 	}
